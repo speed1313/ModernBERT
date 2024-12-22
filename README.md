@@ -13,12 +13,18 @@ rye sync
 python src/convert_dataset.py --dataset c4 --data_subset en --out_root ./my-copy-c4 --splits train_small val
 ```
 
+
+or
+```bash
+python src/convert_dataset.py --dataset /data/experiments/0062_bert/llm-jp-corpus/v3.1.0/train  --out_root ./llm-jp-corpus --splits train val
+```
+
 # Train
 ```bash
 sbatch sbatch.sh
 ```
 
-or 
+or
 ```bash
 python main.py  yamls/main/mosaic-bert-base-uncased.yaml
 ```

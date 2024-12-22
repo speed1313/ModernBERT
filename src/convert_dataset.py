@@ -137,7 +137,26 @@ c4constants.splits["val_small"] = DataSplitConstants(
     hf_split="validation", folder_split="val_small", raw_samples=10000, truncated_samples=10000
 )
 
-CONSTS = {"c4": c4constants, "the_pile": pileconstants}
+llmjpconstants = DatasetConstants(
+    chars_per_sample=6212,  # Computed over validation set
+    chars_per_token=4,  # OpenAI estimate
+)
+
+llmjpconstants.splits["train"] = DataSplitConstants(
+    hf_split="train", folder_split="train", raw_samples=2106077280, truncated_samples=None
+)
+llmjpconstants.splits["train_small"] = DataSplitConstants(
+    hf_split="train", folder_split="train_small", raw_samples=1000000, truncated_samples=100000
+)
+llmjpconstants.splits["val"] = DataSplitConstants(
+    hf_split="validation", folder_split="val", raw_samples=214670, truncated_samples=None
+)
+llmjpconstants.splits["val_small"] = DataSplitConstants(
+    hf_split="validation", folder_split="val_small", raw_samples=10000, truncated_samples=10000
+)
+
+
+CONSTS = {"c4": c4constants, "the_pile": pileconstants, "/data/experiments/0062_bert/llm-jp-corpus/v3.1.0/train": llmjpconstants}
 
 
 class NoConcatDataset(IterableDataset):
@@ -195,7 +214,7 @@ class ConcatTokensDataset(IterableDataset):
         self.bos_text = bos_text
         self.eos_text = eos_text
         self.should_wrap = not no_wrap
-        self.hf_dataset = hf_datasets.load_dataset(dataset_name, name=data_subset, split=split, streaming=True)
+        self.hf_dataset = hf_datasets.load_dataset(data_dir=dataset_name, name=data_subset, split=split, streaming=True)
 
         self.bos_tokens = self.tokenizer(self.bos_text, truncation=False, padding=False, add_special_tokens=False)[
             "input_ids"
