@@ -1089,7 +1089,7 @@ class FlexBertForMaskedLM(FlexBertPreTrainedModel):
             inputs=inputs, indices=indices, batch=batch_size, seqlen=seqlen, labels=labels, ignore_index=ignore_index
         )
 
-    @torch.compile(dynamic=True)
+    # @torch.compile(dynamic=True)
     def compiled_head(self, output: torch.Tensor) -> torch.Tensor:
         return self.decoder(self.head(output))
 

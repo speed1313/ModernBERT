@@ -175,7 +175,7 @@ class FlexBertCompiledSansPositionEmbeddings(FlexBertEmbeddingsBase):
             if self.config.embed_norm:
                 self.norm.reset_parameters()  # type: ignore
 
-    @torch.compile(dynamic=True)
+    # @torch.compile(dynamic=True)
     def forward(self, input_ids: torch.LongTensor, position_ids: Optional[torch.LongTensor] = None) -> torch.Tensor:
         return self.drop(self.norm(self.tok_embeddings(input_ids)))
 

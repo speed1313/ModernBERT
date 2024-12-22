@@ -299,7 +299,7 @@ class FlexBertCompileUnpadPreNormLayer(FlexBertLayerBase):
             self.attn_norm.reset_parameters()
             self.mlp_norm.reset_parameters()
 
-    @torch.compile(dynamic=True)
+    # @torch.compile(dynamic=True)
     def compiled_mlp(self, hidden_states: torch.Tensor) -> torch.Tensor:
         return self.mlp(self.mlp_norm(hidden_states))
 

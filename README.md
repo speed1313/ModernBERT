@@ -1,3 +1,17 @@
+# ModernBERT (FORKED)
+
+
+# Installation
+```bash
+export CC=gcc
+rye sync
+```
+
+
+
+
+# ModernBERT (Original)
+
 # Welcome!
 
 This is the repository where you can find ModernBERT, our experiments to bring BERT into modernity via both architecture changes and scaling.
@@ -60,12 +74,12 @@ If you use ModernBERT in your work, be it the released models, the intermediate 
 
 ```bibtex
 @misc{modernbert,
-      title={Smarter, Better, Faster, Longer: A Modern Bidirectional Encoder for Fast, Memory Efficient, and Long Context Finetuning and Inference}, 
+      title={Smarter, Better, Faster, Longer: A Modern Bidirectional Encoder for Fast, Memory Efficient, and Long Context Finetuning and Inference},
       author={Benjamin Warner and Antoine Chaffin and Benjamin Clavié and Orion Weller and Oskar Hallström and Said Taghadouini and Alexis Gallagher and Raja Biswas and Faisal Ladhak and Tom Aarsen and Nathan Cooper and Griffin Adams and Jeremy Howard and Iacopo Poli},
       year={2024},
       eprint={2412.13663},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2412.13663}, 
+      url={https://arxiv.org/abs/2412.13663},
 }
 ```
