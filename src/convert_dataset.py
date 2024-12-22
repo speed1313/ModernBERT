@@ -195,7 +195,7 @@ class ConcatTokensDataset(IterableDataset):
         self.bos_text = bos_text
         self.eos_text = eos_text
         self.should_wrap = not no_wrap
-        self.hf_dataset = hf_datasets.load_dataset(path=dataset_name, name=data_subset, split=split, streaming=True)
+        self.hf_dataset = hf_datasets.load_dataset(dataset_name, name=data_subset, split=split, streaming=True)
 
         self.bos_tokens = self.tokenizer(self.bos_text, truncation=False, padding=False, add_special_tokens=False)[
             "input_ids"

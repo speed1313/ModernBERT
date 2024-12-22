@@ -1,13 +1,27 @@
 # ModernBERT (FORKED)
 
 
-# Installation
+## Installation
 ```bash
 export CC=gcc
 rye sync
 ```
 
 
+# Prepare dataset
+```bash
+python src/convert_dataset.py --dataset c4 --data_subset en --out_root ./my-copy-c4 --splits train_small val
+```
+
+# Train
+```bash
+sbatch sbatch.sh
+```
+
+or 
+```bash
+python main.py  yamls/main/mosaic-bert-base-uncased.yaml
+```
 
 
 # ModernBERT (Original)

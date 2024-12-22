@@ -33,7 +33,7 @@ train_loader:
   dataset:
     local: ${data_local}
     remote: ${data_remote}
-    split: train
+    split: train_small
     tokenizer_name: ${tokenizer_name}
     max_seq_len: ${max_seq_len}
     shuffle: true
@@ -100,11 +100,11 @@ algorithms:
     clipping_type: norm
     clipping_threshold: 1.0
 
-# (Optional) W&B logging
-# loggers:
-#   wandb:
-#     project:      # Fill this in
-#     entity:      # Fill this in
+#(Optional) W&B logging
+loggers:
+  wandb:
+    project: 0062_bert
+    entity: llm-jp
 
 # (Optional) Checkpoint to local filesystem or remote object store
 # save_interval: 3500ba
