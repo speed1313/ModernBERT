@@ -3,10 +3,10 @@
 
 # Follow the instructions in the README to set up ./my-copy-c4
 # Or point data paths to your remote C4 dataset
-data_local: ./my-copy-c4
+data_local: ./llm-jp-corpus
 data_remote: # If blank, files must be present in data_local
 
-max_seq_len: 128
+max_seq_len: 512
 tokenizer_name: bert-base-uncased
 mlm_probability: 0.3 # MosaicBERT should use 30% masking for optimal performance
 
@@ -33,7 +33,7 @@ train_loader:
   dataset:
     local: ${data_local}
     remote: ${data_remote}
-    split: train_small
+    split: train
     tokenizer_name: ${tokenizer_name}
     max_seq_len: ${max_seq_len}
     shuffle: true
@@ -41,18 +41,18 @@ train_loader:
   drop_last: true
   num_workers: 8
 
-eval_loader:
-  name: text
-  dataset:
-    local: ${data_local}
-    remote: ${data_remote}
-    split: val
-    tokenizer_name: ${tokenizer_name}
-    max_seq_len: ${max_seq_len}
-    shuffle: false
-    mlm_probability: 0.15 # We always evaluate at 15% masking for consistent comparison
-  drop_last: false
-  num_workers: 8
+# eval_loader:
+#   name: text
+#   dataset:
+#     local: ${data_local}
+#     remote: ${data_remote}
+#     split: val
+#     tokenizer_name: ${tokenizer_name}
+#     max_seq_len: ${max_seq_len}
+#     shuffle: false
+#     mlm_probability: 0.15 # We always evaluate at 15% masking for consistent comparison
+#   drop_last: false
+#   num_workers: 8
 
 # Optimization
 scheduler:
@@ -72,7 +72,7 @@ optimizer:
 
 # algorithms:
 
-max_duration: 286720000sp # Subsample the training data for ~275M samples
+max_duration: 500000ba # Subsample the training data for ~275M samples
 eval_interval: 2000ba
 global_train_batch_size: 4096
 
@@ -86,7 +86,7 @@ global_eval_batch_size: 256
 device_eval_microbatch_size: 64
 
 # Logging
-progress_bar: false
+progress_bar: true
 log_to_console: true
 console_log_interval: 1ba
 
@@ -107,12 +107,12 @@ loggers:
     entity: llm-jp
 
 # (Optional) Checkpoint to local filesystem or remote object store
-# save_interval: 3500ba
-# save_num_checkpoints_to_keep: 1  # Important, this cleans up checkpoints saved to DISK
-# save_folder:      # e.g. './{run_name}/ckpt' (local) or 's3://mybucket/mydir/{run_name}/ckpt' (remote)
+save_interval: 100ba
+save_num_checkpoints_to_keep: 1  # Important, this cleans up checkpoints saved to DISK
+save_folder: ./{run_name}/ckpt     # e.g. './{run_name}/ckpt' (local) or 's3://mybucket/mydir/{run_name}/ckpt' (remote)
 
 # (Optional) Load from local filesystem or remote object store to
 # start from an existing model checkpoint;
 # e.g. './ckpt/latest-rank{rank}.pt' (local), or
 # 's3://mybucket/mydir/ckpt/latest-rank{rank}.pt' (remote)
-# load_path: null
+# load_path: ./{run_name}/ckpt
